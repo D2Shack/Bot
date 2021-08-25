@@ -1,10 +1,10 @@
 {
-  "name": "bot",
+  "name": "afkbotv0",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "dependencies": {
-    "bedrock-protocol": "^3.5.1"
+    "bedrock-protocol": "^3.4.0",
+    "node-http-ping": "^0.3.1"
   },
   "devDependencies": {},
   "scripts": {
@@ -12,5 +12,6 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "description": ""
 }

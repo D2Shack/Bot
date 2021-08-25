@@ -1,18 +1,37 @@
-const bedrock = require('bedrock-protocol')
-const client = bedrock.createClient({
-  host: 'fitman22.aternos.me',   // optional
-  port: 48396,         // optional, default 19132
-  username: 'Bot',   // the username you want to join as, optional if online mode
-  offline: true,       // optional, default false. if true, do not login with Xbox Live. You will not be asked to sign-in if set to true.
-  // Optional for some servers which verify the title ID:
-  // authTitle: bedrock.title.MinecraftNintendoSwitch
-})
-client.on('join',client => console.log('Bot conected :3'));
-client.on('text', (packet) => { // Listen for chat messages and echo them back.
-  if (packet.source_name != client.options.username) {
-    client.queue('text', {
-      type: 'chat', needs_translation: false, source_name: client.username, xuid: '', platform_chat_id: '',
-      message: `${packet.source_name} said: ${packet.message} on ${new Date().toLocaleString()}`
+const bedrock = require('bedrock-protocol');
+const { ping } = require('bedrock-protocol');
+const http = require("http");
+const ping0 = require('node-http-ping');
+const load = require('./bot').load();
+const fs = require('fs');
+const data = JSON.parse(fs.readFileSync('./data.json'));
+
+//Create server for Heroku
+
+const server = http.createServer((req, res) => {
+  console.log("On");
+  res.end();
+}).listen(process.env.PORT || 3000);
+
+//Ping to the Heroku page every 20 min
+
+function trafico(){
+  ping0('https://botsito123.herokuapp.com/')
+  .then(time => console.log(`Response time: ${time}ms`))
+  .catch(() => console.log('Failed to ping'))
+};
+
+setInterval(trafico, 20*60*1000);
+
+//Joining into server
+
+ping({ 
+    host: data["host"],
+    port: data["port"]
+}).then(res => {
+
+    load();
+
+}).catch(()=>{
+        console.log("Processing")
     })
-  }
-})
