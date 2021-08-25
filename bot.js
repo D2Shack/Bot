@@ -8,7 +8,7 @@ function load(){
         host: data["host"],   
         port: data["port"],         
         username: data["name"],
-        offline: true
+        offline: true  
     })
 
     client.on('join', client => console.log('Player has joined!'));
