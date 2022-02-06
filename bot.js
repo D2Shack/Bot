@@ -23,13 +23,13 @@ function load(){
 
             switch (packet.message) {
 
-                case 'hola':
+                case 'hi':
                     client.queue('text', {
                         type: 'chat', needs_translation: false, source_name: client.username, xuid: '', platform_chat_id: '',
-                        message: `hola :3`
+                        message: `hi dude :3`
                       })
                 break;
-                case 'kevin':
+                case 'Godly':
                     client.queue('text', {
                         type: 'chat', needs_translation: false, source_name: client.username, xuid: '', platform_chat_id: '',
                         message: `es gay`
